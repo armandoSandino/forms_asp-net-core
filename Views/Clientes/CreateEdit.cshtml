@@ -1,0 +1,44 @@
+
+@model Forms.Models.Cliente
+
+@{
+    var Generos = (List<SelectListItem>)ViewData["Generos"];
+    var Action = ViewData["Action"];
+}
+<div class="card col-md-4 offset-md-4 p-0 mt-2">
+<h5 class="card-header">
+Gestionar Cliente
+</h5>
+<div class="card-body">
+
+<form asp-controller="Clientes" asp-action="@Action" method="post">
+
+<input asp-for="@Model.Id" required/>
+
+<div class="form-group">
+<label> Nombre </label>
+<input  class="form-control" asp-for="@Model.Nombre"  required/>
+</div>
+
+<div class="form-group">
+<label> Email </label>
+<input class="form-control" asp-for="@Model.Email"  required/>
+</div>
+
+<div class="form-group">
+<label>Telefono </label>
+<input class="form-control" asp-for="@Model.Telefono" required/>
+</div>
+
+<div class="form-group">
+<label>Sexo </label>
+<select class="form-control" asp-for="@Model.Sexo" asp-items="@Generos">
+</select>
+</div>
+
+<button type="submit" class="btn btn-primary">Guardar</button>
+
+</form>
+
+</div>
+</div>

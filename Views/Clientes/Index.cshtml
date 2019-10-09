@@ -1,0 +1,98 @@
+@model IEnumerable<Forms.Models.Cliente>
+<!--con esto le diremos a nuestra vista que reciba un modelo de datos -->
+
+@{
+    ViewData["Title"] = "Clientes";
+}
+
+
+<div class="row mb-4 mt-2">
+<div class="col-md-3 offset-md-9">
+<a href="/Clientes/Create" class="btn btn-lg btn-success btn-block"> Agregar </a>
+</div>
+</div>
+
+
+<table class="table"> 
+<thead class="thead-dark">
+<tr>
+<th scope="col">#</th>
+<th scope="col">Nombre</th>
+<th scope="col">Email</th>
+<th scope="col">Telefono</th>
+<th scope="col">Sexo</th>
+<th scope="col">Acciones</th>
+</tr>
+</thead>
+<tbody>
+
+@foreach(var item in Model )
+{
+    <tr>
+    <th scope="row"> @item.Id </th>
+    <td>@item.Nombre</td>
+    <td>@item.Email</td>
+    <td>@item.Telefono </td>
+    <td>@item.Sexo</td>
+<td>
+<a href="/Clientes/Edit/@item.Id" class="btn btn-outline-info"> Editar </a>
+<a href="/Clientes/Delete/@item.Id" class="btn btn-outline-danger">Eliminar </a>
+</td>
+    </tr>
+}
+<!--
+<tr>
+<th scope="row">1</th>
+<td>sarah sandino</td>
+<td>sarah@sandino.com </td>
+<td>34562345</td>
+<td>
+<a href="" class="btn btn-outline-info"> Editar </a>
+<a href="" class="btn btn-outline-danger">Eliminar </a>
+</td>
+</tr>
+
+<tr>
+<th scope="row">2</th>
+<td>sarah sandino</td>
+<td>sarah@sandino.com </td>
+<td>34562345</td>
+<td>
+<a href="" class="btn btn-outline-info"> Editar </a>
+<a href="" class="btn btn-outline-danger">Eliminar </a>
+</td>
+</tr>
+-->
+</tbody>
+</table>
+
+@section LateralIzquierdo{
+
+    <div class="mb-4 mt-2">
+    <text> Interfaz de @ViewData["Title"] </text>
+    
+    <div class="list-group">
+    <a asp-controller="Clientes" 
+    asp-action="Create"
+
+    style="text-align:center" 
+    class="list-group-item list-group-item-action    btn btn-lg btn-success btn-block"> Agregar </a>
+    </div>
+    
+    </div>
+}
+
+@section LateralDerecho {
+
+    <h5> Listando Clientes </h5>
+    <!-- ambas formas nos sirven para llamar vistas parciales -->
+   <!-- esta primer forma no llama al controlador de la vista y no puede recibir algun modelo de datos 
+       <partial name="nombre_vista" />-->
+
+    <!-- esta forma de llamar una vista 
+    si puede recibir un Model o un diccionario(ViewData) de datos -->   
+   <!-- Html.PartialAsync(" vista ", Model) -->
+   <!-- Html.PartialAsync(" vista", Model, ViewData )-->
+   @await Html.PartialAsync("_CookieConsentPartial")
+
+}
